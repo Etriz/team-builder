@@ -1,6 +1,6 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 
-const Form = ({ addTeamMember }) => {
+const Form = ({ addTeamMember, memberToEdit }) => {
   const BLANK_MEMBER = { id: Date.now(), name: "", email: "", username: "" };
   const [member, setMember] = useState(BLANK_MEMBER);
 
@@ -19,6 +19,12 @@ const Form = ({ addTeamMember }) => {
     // console.log(event.target.value);
     setMember({ ...member, [event.target.name]: event.target.value.toString() });
   };
+
+  useEffect(() => {
+    if (memberToEdit) {
+      setMember(memberToEdit);
+    }
+  }, [memberToEdit]);
 
   return (
     <form
