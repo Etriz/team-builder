@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from "react";
 import Form from "./Components/Form";
-// import "./App.css";
 
 function App() {
   const FALLBACK_MEMBERS = [
@@ -13,10 +12,19 @@ function App() {
   const addTeamMember = (member) => {
     setAllMembers([...allMembers, member]);
   };
-  const editMember = (id) => {
+  const loadEditMemberData = (id) => {
     const find = allMembers.find((member) => member.id === id);
     // console.log(find);
     setMemberToEdit(find);
+  };
+  const replaceEditMemberData = (data) => {
+    const updateMemberData = allMembers.map((item) => {
+      if (item.id === data.id) {
+        return data;
+      } else return item;
+    });
+
+    setAllMembers([...updateMemberData]);
   };
   useEffect(() => {
     fetch("https://jsonplaceholder.typicode.com/users")
@@ -39,13 +47,24 @@ function App() {
             <p>{item.username}</p>
             <button
               className="bg-white text-black rounded border px-1 hover:bg-orange-600 hover:border-white hover:text-white right-0 bottom-0"
-              onClick={() => editMember(item.id)}>
+              onClick={() => loadEditMemberData(item.id)}>
               Edit
+            </button>{" "}
+            <button
+              className="bg-white text-black rounded border px-1 mt-1 hover:bg-orange-600 hover:border-white hover:text-white right-0 bottom-0"
+              // onClick={make a delete function}
+            >
+              Delete
             </button>
           </div>
         ))}
       </div>
-      <Form addTeamMember={addTeamMember} memberToEdit={memberToEdit} />
+      <Form
+        addTeamMember={addTeamMember}
+        memberToEdit={memberToEdit}
+        setMemberToEdit={setMemberToEdit}
+        replaceEditMemberData={replaceEditMemberData}
+      />
     </div>
   );
 }

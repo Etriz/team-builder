@@ -1,19 +1,28 @@
 import React, { useState, useEffect } from "react";
 
-const Form = ({ addTeamMember, memberToEdit }) => {
+const Form = ({ addTeamMember, memberToEdit, setMemberToEdit, replaceEditMemberData }) => {
   const BLANK_MEMBER = { id: Date.now(), name: "", email: "", username: "" };
   const [member, setMember] = useState(BLANK_MEMBER);
 
   const submitForm = (event) => {
     event.preventDefault();
-    if (
-      member.name !== BLANK_MEMBER.name &&
-      member.email !== BLANK_MEMBER.email &&
-      member.username !== BLANK_MEMBER.username
-    ) {
-      addTeamMember(member);
-      setMember(BLANK_MEMBER);
+    if (!memberToEdit) {
+      if (
+        member.name !== BLANK_MEMBER.name &&
+        member.email !== BLANK_MEMBER.email &&
+        member.username !== BLANK_MEMBER.username
+      ) {
+        addTeamMember(member);
+        clearForm();
+      }
+    } else {
+      replaceEditMemberData(member);
+      clearForm();
     }
+  };
+  const clearForm = () => {
+    setMember(BLANK_MEMBER);
+    setMemberToEdit();
   };
   const handleChanges = (event) => {
     // console.log(event.target.value);
