@@ -25,7 +25,6 @@ const Form = ({ addTeamMember, memberToEdit, setMemberToEdit, replaceEditMemberD
     setMemberToEdit();
   };
   const handleChanges = (event) => {
-    // console.log(event.target.value);
     setMember({ ...member, [event.target.name]: event.target.value.toString() });
   };
 
@@ -47,7 +46,7 @@ const Form = ({ addTeamMember, memberToEdit, setMemberToEdit, replaceEditMemberD
           placeholder="Add Name"
           value={member.name}
           name="name"
-          className="px-2 py-1 ml-6 text-black border-2 outline-none focus:border-orange-600"
+          className="px-2 py-1 ml-6 text-black rounded border-2 outline-none focus:border-orange-600"
           onChange={handleChanges}
         />
       </div>
@@ -59,7 +58,7 @@ const Form = ({ addTeamMember, memberToEdit, setMemberToEdit, replaceEditMemberD
           placeholder="Add Email"
           value={member.email}
           name="email"
-          className="px-2 py-1 ml-6 text-black border-2 outline-none focus:border-orange-600"
+          className="px-2 py-1 ml-6 text-black rounded border-2 outline-none focus:border-orange-600"
           onChange={handleChanges}
         />
       </div>
@@ -71,14 +70,14 @@ const Form = ({ addTeamMember, memberToEdit, setMemberToEdit, replaceEditMemberD
           placeholder="Add Username"
           value={member.username}
           name="username"
-          className="px-2 py-1 ml-6 text-black border-2 outline-none focus:border-orange-600"
+          className="px-2 py-1 ml-6 text-black rounded border-2 outline-none focus:border-orange-600"
           onChange={handleChanges}
         />
       </div>
       <button
         type="submit"
         className="bg-white text-black rounded border py-1 px-3 mt-6 w-1/2 hover:bg-orange-600 hover:border-white hover:text-white">
-        Submit
+        Add Member
       </button>
     </form>
   );

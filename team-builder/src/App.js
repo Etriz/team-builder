@@ -12,9 +12,13 @@ function App() {
   const addTeamMember = (member) => {
     setAllMembers([...allMembers, member]);
   };
+  const deleteTeamMember = (id) => {
+    const findIndex = allMembers.findIndex((member) => member.id === id);
+    allMembers.splice(findIndex, 1);
+    setAllMembers([...allMembers]);
+  };
   const loadEditMemberData = (id) => {
     const find = allMembers.find((member) => member.id === id);
-    // console.log(find);
     setMemberToEdit(find);
   };
   const replaceEditMemberData = (data) => {
@@ -36,9 +40,9 @@ function App() {
       .catch((err) => console.error("Fetch API error!", err));
   }, []);
   return (
-    <div className="App container mx-auto my-4 text-white">
+    <div className="container mx-auto py-4 text-white">
       <h1 className="text-center text-4xl">Team Members</h1>
-      <div className="App-header flex flex-wrap justify-center">
+      <div className="flex flex-wrap justify-center">
         {allMembers.map((item) => (
           <div key={item.id} className="w-56 h-22 m-2 p-2 rounded border border-white bg-teal-700">
             <h2 className="text-lg">{item.name}</h2>
@@ -52,8 +56,7 @@ function App() {
             </button>{" "}
             <button
               className="bg-white text-black rounded border px-1 mt-1 hover:bg-orange-600 hover:border-white hover:text-white right-0 bottom-0"
-              // onClick={make a delete function}
-            >
+              onClick={() => deleteTeamMember(item.id)}>
               Delete
             </button>
           </div>
